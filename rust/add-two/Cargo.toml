@@ -1,0 +1,6 @@
+[workspace]
+resolver = "3"
+members = ["base", "ffi"]
+
+[workspace.dependencies]
+base = {path = "./base"}
