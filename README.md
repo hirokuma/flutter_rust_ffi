@@ -9,13 +9,13 @@ FFIおためし
 * `flutter pub get`
 * `./rust/add-two`のREADMEを見ながらAndroid用共有ライブラリを配置
 * `flutter run`
-* カウンターじゃない方のボタンをクリックすると`my_add`を呼び出して結果をボタンに貼る
+* 起動時に`add(123, 456)`を呼び出して結果を出力している。
 
 ### Rust
 
 #### ビルド関係
 
-flutter_rust_bridgeのインストール。
+[flutter_rust_bridge](https://cjycode.com/flutter_rust_bridge/quickstart)のインストール。
 
 ```shell
 $ cargo install flutter_rust_bridge_codegen
@@ -34,9 +34,9 @@ $ rustup target add aarch64-linux-android
 
 #### flutter_rust_bridge
 
-このリポジトリでは実行済みなので実行しないこと。
+このリポジトリでは実行済みなので実行しないこと！  
 プロジェクトのトップディレクトリで実行するとファイルが作られるし、
-既存の`lib/main.dart`は上書きされる。
+既存の`lib/main.dart`は上書きされる([Directory structure](https://cjycode.com/flutter_rust_bridge/guides/miscellaneous/directory))。
 
 ```shell
 $ flutter_rust_bridge_codegen integrate
@@ -50,18 +50,3 @@ bindingの生成`generate`はRustのコードが変更されたら実行する�
 ```shell
 $ flutter_rust_bridge_codegen generate
 ```
-
-
-```shell
-$ cargo ndk -t arm64-v8a build --release -p ffi
-$ ls target/aarch64-linux-android/release/lib*.so
-target/aarch64-linux-android/release/libffi.so
-$ nm target/aarch64-linux-android/release/libffi.so | grep " T "
-0000000000011d5c T my_add
-```
-
-```shell
-$ mkdir -p ../../android/app/src/main/jniLibs/arm64-v8a
-$ cp target/aarch64-linux-android/release/libffi.so ../../android/app/src/main/jniLibs/arm64-v8a/
-```
-
